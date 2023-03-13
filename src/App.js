@@ -19,7 +19,7 @@ function App() {
     },
   ];
 
-  return <Accordion />;
+  return <Accordion items={items}/>;
 }
 
 export default App;
