@@ -1,25 +1,29 @@
 import { useState } from "react";
+import { GoChevronDown, GoChevronLeft } from "react-icons/go";
 
 function Accordion({ items }) {
-    const [expandedIndex, setExpanded] = useState(0);
+  const [expandedIndex, setExpandedIndex] = useState(0);
 
-  const renderedItems = items?.map((item, index) => {
+  const handleClick = (nextIndex) => {
+    setExpandedIndex(nextIndex);
+  };
+
+  const renderedItems = items.map((item, index) => {
     const isExpanded = index === expandedIndex;
 
-    console.log(isExpanded);
-
-    const content = isExpanded && <div>{item.content}</div>
+    const icon = <span>{isExpanded ? <GoChevronDown/> : <GoChevronLeft/>}</span>;
 
     return (
       <div key={item.id}>
-        <div>{item.label}</div>
-        {content}
+        <div onClick={() => handleClick(index)}>
+          {icon}
+          {item.label}
+        </div>
+        {isExpanded && <div>{item.content}</div>}
       </div>
     );
   });
-  return <div>
-    {renderedItems}
-  </div>;
+  return <div>{renderedItems}</div>;
 }
 
 export default Accordion;
