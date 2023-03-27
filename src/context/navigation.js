@@ -1,12 +1,35 @@
-import { createContext } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const NavigationContext = createContext();
 
-const NavigationProvider = ({children}) =>{
-    return <NavigationContext.Provider value={{}}>
-        {children}
-    </NavigationContext.Provider>
-}
+const NavigationProvider = ({ children }) => {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
-export {NavigationProvider};
+
+  //handlers for foward and back click in the app
+  useEffect(() => {
+    const handler = () => {
+        setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener("popstate", handler);
+
+    return ()=>{
+        window.removeEventListener('popstate', handler);
+    }
+  });
+
+  //sets the state for react to match the path
+  const navigate =(to)=>{
+    window.history.pushState({},'',to);
+    setCurrentPath(to);
+  };
+
+  return (
+    <NavigationContext.Provider value={{currentPath, navigate}}>
+      {children}
+    </NavigationContext.Provider>
+  );
+};
+
+export { NavigationProvider };
 export default NavigationContext;
