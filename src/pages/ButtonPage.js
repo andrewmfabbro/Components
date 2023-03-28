@@ -3,7 +3,7 @@ import { GoBell, GoCloudDownload, GoDatabase } from "react-icons/go";
 
 function ButtonPage() {
   const handleClick = () => {
-    //console.log("click");
+    console.log("clicked the button");
   };
   return (
     <div>
@@ -14,24 +14,24 @@ function ButtonPage() {
         </Button>
       </div>
       <div>
-        <Button danger outline>
+        <Button danger outline className="mb-5" onClick={handleClick}>
           <GoCloudDownload />
           Buy now
         </Button>
       </div>
       <div>
-        <Button warning>
+        <Button warning className="mb-5" onClick={handleClick}>
           <GoDatabase />
           See deal!
         </Button>
       </div>
       <div>
-        <Button secondary outline>
+        <Button secondary outline className="mb-5" onClick={handleClick}>
           Hide ads
         </Button>
       </div>
       <div>
-        <Button primary rounded>
+        <Button primary rounded className="mb-5" onClick={handleClick}>
           Something
         </Button>
       </div>
